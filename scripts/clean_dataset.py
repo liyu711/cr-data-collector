@@ -191,7 +191,7 @@ for folder in folders:
         dates.append(folder)
 dates = dates[:-1]
 # dates = dates[11:15]
-dates = ['2019_09_29']
+dates = ['2019_04_09']
 
 for date in dates:
     if date == "2019_04_22":
@@ -253,7 +253,7 @@ for date in dates:
         # copy_file('start_time.txt')
         # copy_file('start_time_v.txt')
 
-        # copy_images('images_udst', startid_cam, nframes)
+        copy_images('images_udst', startid_cam, nframes)
         # copy_images('images_hist_0', startid_cam, nframes)
         # copy_images('images_hist_1', startid_cam, nframes)
         # copy_images('images', startid_cam, nframes)
@@ -263,10 +263,10 @@ for date in dates:
         # copy_images('masks_seg_viz', startid_cam, nframes, overwrite=True)
         # copy_images('depth_mono', startid_cam, nframes, ext='npy')
 
-        if 'mrcnn_dets.txt' in folders and 'masks_obj' in folders and 'mask_obj_img' in folders:
-            update_mrcnndets(startid_cam, nframes, overwrite=True)
-        else:
-            print("Files are not complete for updating mrcnn results.")
+        # if 'mrcnn_dets.txt' in folders and 'masks_obj' in folders and 'mask_obj_img' in folders:
+        #     update_mrcnndets(startid_cam, nframes, overwrite=True)
+        # else:
+        #     print("Files are not complete for updating mrcnn results.")
 
         # copy_radar_npy('radar_chirps_win_RISEP', startid_rad-rstartid, nframes, chirpids=[0, 50, 101, 152, 203, 254])
         # copy_radar_npy('radar_chirps_win_RISEP', startid_rad-rstartid, nframes, chirpids=[1, 51, 102, 153, 204])
