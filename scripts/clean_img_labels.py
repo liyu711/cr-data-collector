@@ -63,21 +63,30 @@ def update_radar_names(file, startid, dates, seq, data_root_new):
     path_new = os.path.join(data_root_new, dates, seq)
     csv_output = df_result.to_csv(os.path.join(path_new, new_file_name), index= False)
 
-# data_root_old = '/mnt/nas_crdataset'
-data_root_old = '/mnt/disk1/UWCR'
-dates = '2019_04_09'
-seq = '2019_04_09_bms1000'
-data_root_new = '/mnt/disk1/UWCR_new'
-# '/mnt/nas_crdataset2'
-start_id_cam = 2
-start_id_radar = 2
-file_name_cam = 'image_labels.csv'
-file_name_rad = 'ramap_labels.csv'
+def clean_up_incorrect_filename(file):
+    df_original = pd.read_csv(file)
+    df_original.dropna()
+    new = df_original["filename"].str.split(",")
+    print(new)
 
-file = os.path.join(data_root_old, dates, seq, file_name_cam)
+
+file ='/mnt/disk1/UWCR/2019_04_09/2019_04_09_bms1000/image_labels.csv'
+clean_up_incorrect_filename(file)
+# data_root_old = '/mnt/nas_crdataset'
+# data_root_old = '/mnt/disk1/UWCR'
+# dates = ['2019_04_09']
+# seq = '2019_04_09_bms1000'
+# data_root_new = '/mnt/disk1/UWCR_new'
+# # '/mnt/nas_crdataset2'
+# start_id_cam = 2
+# start_id_radar = 2
+# file_name_cam = 'image_labels.csv'
+# file_name_rad = 'ramap_labels.csv'
+
+# file = os.path.join(data_root_old, dates, seq, file_name_cam)
     #'/mnt/disk1/UWCR/2019_04_09/2019_04_09_bms1000/image_labels.csv'
-file_radar = os.path.join(data_root_old, dates, seq, file_name_rad)
+# file_radar = os.path.join(data_root_old, dates, seq, file_name_rad)
     # os.path.join(data_root_old, dates, seq, file_name_rad)
 # file_radar = '/mnt/disk1/UWCR/2019_04_09/2019_04_09_bms1000/ramap_labels.csv'
-update_img_names(file, start_id_cam, data_root_old, dates, seq, data_root_new)
-update_radar_names(file_radar, 3, dates, seq, data_root_new)
+# update_img_names(file, start_id_cam, data_root_old, dates, seq, data_root_new)
+# update_radar_names(file_radar, 3, dates, seq, data_root_new)

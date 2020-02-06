@@ -4,6 +4,7 @@ import time
 
 sys.path.append(os.path.abspath('..'))
 from utils.dataset_tools import fix_cam_drop_frames, calculate_frame_offset
+from scripts.clean_img_labels import update_img_names, update_radar_names
 
 rename_dict = {
     'images': 'images_raw_0',
@@ -184,6 +185,9 @@ def update_mrcnndets(startid_cam, nframes, overwrite=False):
 data_root_old = '/mnt/nas_crdataset'
 data_root_new = '/mnt/nas_crdataset2'
 
+# data_root_old = '/mnt/disk1/UWCR'
+# data_root_new = '/mnt/disk1/UWCR_new'
+
 dates = []
 folders = sorted(os.listdir(data_root_old))
 for folder in folders:
@@ -191,7 +195,9 @@ for folder in folders:
         dates.append(folder)
 dates = dates[:-1]
 # dates = dates[11:15]
-dates = ['2019_04_09']
+dates = []
+file_name_cam = 'image_labels.csv'
+file_name_rad = 'ramap_labels.csv'
 
 for date in dates:
     if date == "2019_04_22":
@@ -238,7 +244,12 @@ for date in dates:
         startid_cam = rstartid + frame_exp
         startid_rad = rstartid + frame_exp + offsetrc
 
+
         print("n_frames: %d, start_cam: %d, start_rad: %d" % (nframes, startid_cam, startid_rad))
+        file = os.path.join(data_root_old, date, seq, file_name_cam)
+        file_radar = os.path.join(data_root_old, date, seq, file_name_rad)
+        update_img_names(file, startid_cam, data_root_old, date, seq, data_root_new)
+        update_radar_names(file_radar, startid_rad, date, seq, data_root_new)
 
         # for f in folders:
         #     if f.endswith('.csv'):
@@ -253,7 +264,7 @@ for date in dates:
         # copy_file('start_time.txt')
         # copy_file('start_time_v.txt')
 
-        copy_images('images_udst', startid_cam, nframes)
+        # copy_images('images_udst', startid_cam, nframes)
         # copy_images('images_hist_0', startid_cam, nframes)
         # copy_images('images_hist_1', startid_cam, nframes)
         # copy_images('images', startid_cam, nframes)
