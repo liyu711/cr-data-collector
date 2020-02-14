@@ -57,7 +57,7 @@ def update_radar_names(file, startid, dates, seq, data_root_new):
         extracted_value = df_original.loc[df_original['filename'] == name]
         for index, row in extracted_value.iterrows():
             df_result = df_result.append(
-                {'filename': dates + '' + seq + '_' + str('%06d' % (int(name[19:-4]) - startid)) + '.jpg',
+                {'filename': seq + '_' + str('%06d' % (int(name[19:-4]) - startid)) + '.jpg',
                  'file_size': row['file_size'],
                  'file_attributes': row['file_attributes'], 'region_count': row['region_count'],
                  'region_id': row['region_id'], 'region_shape_attributes': row['region_shape_attributes'],
@@ -83,7 +83,7 @@ def clean_up_incorrect_filename(file):
     output = result.to_csv('/Users/yudongli/Desktop/image_labels2.csv')
 
 
-# file = '/Users/yudongli/Desktop/image_labels.csv'
+file = '/Users/yudongli/Desktop/ramap_labels.csv'
 # file ='/mnt/disk1/UWCR/2019_04_09/2019_04_09_bms1000/image_labels.csv'
 # clean_up_incorrect_filename(file)
 # data_root_old = '/mnt/nas_crdataset'
